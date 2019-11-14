@@ -19,10 +19,22 @@ def read_space_objects_data_from_file(input_filename):
             if len(line.strip()) == 0 or line[0] == '#':
                 continue  # пустые строки и строки-комментарии пропускаем
             object_type = line.split()[0].lower()
+            print(object_type)
             if object_type == "star":  # FIXME: do the same for planet
                 star = Star()
+                print('2')
+                line = line.split()
+                print(line)
                 parse_star_parameters(line, star)
+                print('3')
                 objects.append(star)
+                print('1')
+            elif object_type == "planet":  # FIXME: do the same for planet
+                planet = Planet()
+                line = line.split()
+                print(line)
+                parse_planet_parameters(line, planet)
+                objects.append(planet)
             else:
                 print("Unknown space object")
 
@@ -43,16 +55,13 @@ def parse_star_parameters(line, star):
     **star** — объект звезды.
     """
 
-    star = Star()
-    line = input()
-    line[1] = star.R
-    line[2] = star.color
-    line[3] = star.m
-    line[4] = star.x
-    line[5] = star.y
-    line[6] = star.Vx
-    line[7] = star.Vy
-
+    star.R = int(line[1])
+    star.color = line[2]
+    star.m = float(line[3])
+    star.x = float(line[4])
+    star.y = float(line[5])
+    star.Vx = int(line[6])
+    star.Vy = int(line[7])
 
 
 def parse_planet_parameters(line, planet):
@@ -70,15 +79,14 @@ def parse_planet_parameters(line, planet):
     **line** — строка с описание планеты.
     **planet** — объект планеты.
     """
-    planet = Planet()
-    line = input()
-    line[1] = planet.R
-    line[2] = planet.color
-    line[3] = planet.m
-    line[4] = planet.x
-    line[5] = planet.y
-    line[6] = planet.Vx
-    line[7] = planet.Vy
+
+    planet.R = int(line[1])
+    planet.color = line[2]
+    planet.m = float(line[3])
+    planet.x = float(line[4])
+    planet.y = float(line[5])
+    planet.Vx = float(line[6])
+    planet.Vy = float(line[7])
 
 
 def write_space_objects_data_to_file(output_filename, space_objects):
